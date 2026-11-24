@@ -933,9 +933,35 @@ $("grid").addEventListener("click",async e=>{
 });
 buildFilters();$("taste").value=state.taste;render();
 {const n=Object.values(SHOPS).filter(s=>s.promo&&s.promo.badge).length;if(n)$("announce").textContent=n+(n===1?" of your shops has":" of your shops have")+" a sale on now. Look for the tag on the photo.";}
+/* Live website (outside Claude): stars and votes save to the "Site saves" tab of Dora's Google Sheet through her Apps Script web app, unlocked with her passcode. */
+const SHEET_API="";
+function sheetMode(){
+  const PK="coolfinds-pass";let pass="";try{pass=localStorage.getItem(PK)||""}catch(e){}
+  const btn=document.createElement("button");btn.type="button";btn.className="navbtn";btn.id="unlock";btn.textContent="Unlock my stars";btn.style.marginRight="8px";
+  $("manage").before(btn);
+  const call=async q=>{const u=new URL(SHEET_API);for(const[k,v]of Object.entries({...q,pass}))u.searchParams.set(k,v);const r=await(await fetch(u)).json();if(!r.ok)throw new Error(r.error||"failed");return r};
+  const col=kind=>({doc:k=>({set:o=>{const{thumb,...d}=o;return call({action:"set",kind,key:k,data:JSON.stringify(d)})},delete:()=>call({action:"delete",kind,key:k})})});
+  const open=async quiet=>{
+    btn.disabled=true;btn.textContent="Loading…";
+    try{
+      const r=await call({action:"list"});
+      for(const k in favs)delete favs[k];Object.assign(favs,r.favs||{});
+      for(const k in votes)delete votes[k];Object.assign(votes,r.votes||{});
+      fb=col("vote");favDb=col("fav");$("tab-fav").hidden=false;$("taste").hidden=false;
+      $("fbnote").hidden=false;$("fbnote").textContent="Your stars and 👍/👎 save to your Google Sheet, so Claude sees them on the next refresh.";
+      btn.remove();render();
+    }catch(e){
+      btn.disabled=false;btn.textContent="Unlock my stars";
+      if(String(e.message).includes("passcode")){pass="";try{localStorage.removeItem(PK)}catch(x){}}
+      if(!quiet)alert(String(e.message).includes("passcode")?"That passcode didn't work.":"Couldn't reach your Google Sheet. Try again in a moment.");
+    }
+  };
+  btn.onclick=()=>{const p=prompt("Passcode to save your stars and votes:");if(!p)return;pass=p.trim();try{localStorage.setItem(PK,pass)}catch(e){}open(false)};
+  if(pass)open(true);
+}
 (async()=>{
   const db=await window.claude?.use?.("db").catch(()=>null);
-  if(!db){$("taste").hidden=true;$("fbnote").hidden=true;if(state.taste!=="all"){state.taste="all";render()}return}
+  if(!db){$("taste").hidden=true;$("fbnote").hidden=true;if(state.taste!=="all"){state.taste="all";render()}if(SHEET_API)sheetMode();return}
   fb=db.collection("feedback");favDb=db.collection("favs");$("tab-fav").hidden=false;render();
   favDb.onSnapshot(snap=>{for(const k in favs)delete favs[k];snap.docs.forEach(d=>{const f=d.data();if(f&&f.n)favs[d.id]=f});render()},()=>{});
   focusDb=db.collection("focus");cfgDb=db.collection("shopcfg");buildShops();
