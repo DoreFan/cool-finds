@@ -934,7 +934,7 @@ $("grid").addEventListener("click",async e=>{
 buildFilters();$("taste").value=state.taste;render();
 {const n=Object.values(SHOPS).filter(s=>s.promo&&s.promo.badge).length;if(n)$("announce").textContent=n+(n===1?" of your shops has":" of your shops have")+" a sale on now. Look for the tag on the photo.";}
 /* Live website (outside Claude): stars and votes save to the "Site saves" tab of Dora's Google Sheet through her Apps Script web app, unlocked with her passcode. */
-const SHEET_API="";
+const SHEET_API="https://script.google.com/macros/s/AKfycbxztG5GBm8RF4lLQ5yynRZciGRFxYjMt3Ae4kpNOrBk3A3NCx84PfguHAh3dqYB8ANs/exec";
 function sheetMode(){
   const PK="coolfinds-pass";let pass="";try{pass=localStorage.getItem(PK)||""}catch(e){}
   const btn=document.createElement("button");btn.type="button";btn.className="navbtn";btn.id="unlock";btn.textContent="Unlock my stars";btn.style.marginRight="8px";
