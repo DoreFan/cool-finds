@@ -299,6 +299,36 @@ footer{font-size:11px;letter-spacing:.04em}
 .brand,.tab{white-space:nowrap}
 @media (max-width:520px){.brand{font-size:17px}.tabs{margin-left:10px;gap:0}.tab{padding:8px 7px;font-size:11px}.navbtn{height:36px;padding:0 10px}.lk-announce{font-size:10px;padding:9px 16px}}
 @media (max-width:370px){.brand{display:none}.tabs{margin-left:0}}
+/* ===== Little King dark (v38): deep forest night, cream ink, oxblood accents. Follows the system setting. ===== */
+:root{--lk-ink-muted:#273e0ebf}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --lk-surface:#121a0b; --lk-raise:#19240f; --lk-line:#2f3d20; --lk-ink:#f3eedf; --lk-ink-muted:#f3eedfa8; --lk-ink-soft:#f3eedfcc; --lk-ink-faint:#f3eedf14;
+  --lk-moss:#c9d3a8; --lk-signal:#6b1d1a; --lk-signal-line:#8a2e2a; --lk-on-signal:#fbefe6; --lk-rose:#f2b9ab; --star:#ffc93d;
+  --bg:var(--lk-surface); --surface:var(--lk-raise); --fg:var(--lk-ink); --muted:var(--lk-ink-soft); --line:var(--lk-line);
+  --accent:var(--lk-ink); --accent-fg:var(--lk-surface); --chip:var(--lk-ink-faint);
+  --promo:var(--lk-rose); --promo-bg:#6b1d1a40; --promo-fg:var(--lk-on-signal); --warn:var(--lk-rose); --warn-bg:#6b1d1a40;
+  --like:var(--lk-ink); --like-bg:var(--lk-ink-faint); --tile-ink:var(--lk-ink);
+  --t-kitchen:#3b3519; --t-home:#26361a; --t-desk:#2a3426; --t-play:#3d2a1b; --t-gadgets:#2f3122; --t-garden:#2d3d17; --t-bath:#213328; --t-books:#3a2f1c; --t-acc:#3a2420; --t-art:#3b351a; --t-wear:#2f2e24; --t-kids:#3c2923;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --lk-surface:#121a0b; --lk-raise:#19240f; --lk-line:#2f3d20; --lk-ink:#f3eedf; --lk-ink-muted:#f3eedfa8; --lk-ink-soft:#f3eedfcc; --lk-ink-faint:#f3eedf14;
+  --lk-moss:#c9d3a8; --lk-signal:#6b1d1a; --lk-signal-line:#8a2e2a; --lk-on-signal:#fbefe6; --lk-rose:#f2b9ab; --star:#ffc93d;
+  --bg:var(--lk-surface); --surface:var(--lk-raise); --fg:var(--lk-ink); --muted:var(--lk-ink-soft); --line:var(--lk-line);
+  --accent:var(--lk-ink); --accent-fg:var(--lk-surface); --chip:var(--lk-ink-faint);
+  --promo:var(--lk-rose); --promo-bg:#6b1d1a40; --promo-fg:var(--lk-on-signal); --warn:var(--lk-rose); --warn-bg:#6b1d1a40;
+  --like:var(--lk-ink); --like-bg:var(--lk-ink-faint); --tile-ink:var(--lk-ink);
+  --t-kitchen:#3b3519; --t-home:#26361a; --t-desk:#2a3426; --t-play:#3d2a1b; --t-gadgets:#2f3122; --t-garden:#2d3d17; --t-bath:#213328; --t-books:#3a2f1c; --t-acc:#3a2420; --t-art:#3b351a; --t-wear:#2f2e24; --t-kids:#3c2923;
+  color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tile.photo img{filter:brightness(.9) contrast(1.04)}
+  :root:not([data-theme="light"]) .chip .dot{box-shadow:0 0 0 1px var(--lk-ink-muted)}
+  :root:not([data-theme="light"]) .pbadge,:root:not([data-theme="light"]) .vb.nope[aria-pressed="true"]{background:var(--lk-signal);color:var(--lk-on-signal);border-color:var(--lk-signal-line)}
+  :root:not([data-theme="light"]) .navbtn:hover,:root:not([data-theme="light"]) .swapbtn:hover{color:var(--lk-surface)}
+  :root:not([data-theme="light"]) dialog.drawer{background:var(--lk-surface);border-left-color:var(--lk-line)}
+  :root:not([data-theme="light"]) dialog.drawer::backdrop{background:#000000a6}
+  :root:not([data-theme="light"]) .sicon{box-shadow:0 0 0 1px var(--lk-ink-muted)}}
+:root[data-theme="dark"] .tile.photo img{filter:brightness(.9) contrast(1.04)}
+:root[data-theme="dark"] .chip .dot{box-shadow:0 0 0 1px var(--lk-ink-muted)}
+:root[data-theme="dark"] .pbadge,:root[data-theme="dark"] .vb.nope[aria-pressed="true"]{background:var(--lk-signal);color:var(--lk-on-signal);border-color:var(--lk-signal-line)}
 </style>
 
 <div class="lk-announce" id="announce">Well made, built to last, and a little witty</div>
